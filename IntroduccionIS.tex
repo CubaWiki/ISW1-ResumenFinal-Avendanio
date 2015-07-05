@@ -1,0 +1,113 @@
+%Sección: Introducción Ingeniería de Software
+
+\chapter{Ingeniería de Software}
+\section{Introducción}
+\subsection{Definición}
+
+La \emph{Ingeniería de Software} es la aplicación de un acercamiento sistemático, disciplinado y cuantificable para el desarrollo, operación y mantenimiento de un software.
+
+La Ingeniería de Software(IS) reúne conocimientos, herramientas y métodos para definir requerimientos de software y realizar diseño, construcción, testing y mantenimiento de software.
+
+\subsubsection{Objetivo:} Se ocupa de construir un producto de software de buena calidad, lidiando con múltiples restricciones (tiempo, presupuesto, requerimientos, etc)
+
+\subsubsection{Problemáticas:}
+\begin{itemize}
+	\item Lidiar con la escala y complejidad de sistemas de software
+	\item Identificar que significa buena calidad
+	\item Disciplina joven, víctima de su propio éxito
+\end{itemize}
+
+\section{Ciclo de Vida de Desarrollo de Software}
+
+\subsection{Modelo Cascada (Royce, 1970)}
+
+\includegraphics[width = 0.9\textwidth]{Graficos/ModeloCascada.png}
+
+\subsection{Modelo V}
+
+\includegraphics[width = 0.9\textwidth]{Graficos/ModeloV.png}
+
+\subsection{Modelo Espiral (Boehm,1988)}
+
+\includegraphics[width = 0.9\textwidth]{Graficos/ModeloEspiral.png}
+
+\newpage
+
+\subsection{Unified SW Development Process (Jacobson, 1999) }
+
+División en fases e iteraciones
+
+\includegraphics[width = 0.9\textwidth]{Graficos/ModeloJacobson.png}
+
+\subsection{Modelo Twin Peaks}
+
+\includegraphics[width = 0.9\textwidth]{Graficos/ModeloTwinPeaks.png}
+
+\newpage
+
+\section{Modelos}
+
+Un \emph{modelo} es una representación de la realidad.
+
+Los modelos son construidos con el objetivo de lidiar con la complejidad de los sistemas.
+
+Los modelos son efectivos porque:
+
+\begin{itemize}
+	\item Describen un aspecto del problema a resolver
+	\item Omiten detalles no relevantes al análisis para el cual se construye el modelo
+	\item Permite comunicar en forma precisa aspectos del problema y la solución a otras personas.
+	\item Son más baratos de construir
+	\item Facilita el análisis (permite detectar errores y falencias tempranamente)
+\end{itemize}
+
+Los modelos tienen un Scope y un Span
+
+\begin{description}
+	\item[Scope(aspecto):] tipo de fenómeno que se capta
+	\item[Span(segmento):] individuos descriptos
+\end{description}
+
+\emph{Los modelos en Ingeniería de Software son lenguajes formales con una denotación precisa en el mundo real}
+
+
+Los lenguajes formales tienen:
+
+\begin{itemize}
+	\item una \emph{sintaxis}(gráfica/texto) para describirlos: cuáles son los garabatos permitidos
+	\item una \emph{semántica} para abstraer accidentes sintácticos: cuáles de estos garabatos significan lo mismo.
+\end{itemize}
+
+\includegraphics[width = 0.9\textwidth]{Graficos/Modelos.png}
+
+Un sistema se analiza desde múltiples modelos complementarios. Cada modelos enfoca una aspecto(scope) del sistema, para permitir análisis rigurosos y escalables.
+
+Es imposible vincular los distintos modelos formalmente, manteniéndolos analizables y entendibles(útiles).
+
+Ejemplos de modelos: de Objetivos, de Agentes, de Operaciones, Conceptuales, de Comportamiento, Arquitectónicos.
+
+\newpage
+
+\section{Validación y Verificación}
+\label{VerificacionValidacion}
+\begin{description}
+	\item[Validación:] $\longrightarrow$ Mundo vs. Modelo
+	Proceso cuyo objetivo es \emph{incrementar la confianza} de que una descripción formal \emph{se corresponde} con la realidad. Es imposible de realizar.
+	\item[Verificacion:] $\longrightarrow$ Modelo vs. Modelo
+	Proceso cuyo objetivo es \emph{garantizar} que una descripción formal \emph{es correcta} con respecto a otra.
+\end{description}
+
+\includegraphics[width = 0.9\textwidth]{Graficos/VerificacionValidacion.png}
+
+\section{Resumen}
+
+\begin{itemize}
+	\item Que es la IS? Definición, objetivos, problemas
+	\item Ciclo de vida de desarrollo de Software
+	\item Modelos: definición, ventajas	
+		\begin{itemize}
+			\item Scope y Span
+			\item Sintaxis, Semántica y Denotación
+			\item Verificación y Validación
+		\end{itemize}
+\end{itemize}

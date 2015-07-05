@@ -1,0 +1,350 @@
+%section Testing
+\chapter{Testing}
+\section{Verificación}
+Recordemos algunos conceptos \footnote{ver \ref{VerificacionValidacion}}
+\begin{description}
+\item [Validación:] proceso cuyo objetivo es \emph{incrementar la confianza} de que una descripción formal se \emph{corresponde} con la realidad.
+\item [Verificación:] proceso cuyo objetivo es \emph{garantizar} que una descripción formal es \emph{correcta} con respecto a otra.
+\end{description}
+
+La verificación plantea la pregunta: ¿Estamos haciendo el producto correctamente? (en relación con un componente anterior que describe nuestro producto)
+
+\begin{description}
+	\item [Verificación Dinámica:] consiste en ejecutar y observar el comportamiento de un producto.	
+	\begin{itemize}
+		\item Testing
+		\item Run time monitoring
+		\item Run time verification
+	\end{itemize}
+	
+	\item [Verificación Estática:] consiste en realizar un análisis de una representación estática del sistema para descubrir problemas.
+	\begin{itemize}
+		\item Inspecciones, Revisiones, Walkthrough (seguimiento)
+		\item Análisis de Reglas Sintácticas sobre código
+		\item Análisis Data Flow sobre código
+		\item Model Checking
+		\item Prueba de teoremas
+	\end{itemize}
+\end{description}
+
+\section{Calidad de Software}
+\textbf{Conceptos relacionados:} Confiabilidad, Usabilidad, Corrección, Robustez, Facilidad de Mantenimiento, Seguridad, Reusabilidad datos, Verificabilidad + Claridad, Funcionalidad, Interoperabilidad.
+
+La calidad del producto depende de tareas realizadas durante todo el proceso de desarrollo. Detectar errores en forma temprana ahorra esfuerzos, tiempo, recursos.
+
+\subsection*{Definiciones}
+\begin{description}
+	\item [Falla:] diferencia entre los resultados esperados y reales (manifestación de un defecto).
+	\item [Defecto:] está en el texto del programa, una especificación, un diseño, y desde allí se hace visible una falla.
+	\item [Error:] equivocación humana.
+\end{description}
+
+Un error lleva a uno o más defectos. Un defecto lleva a 0, 1 o más fallas.
+
+\section{Testing}
+\textbf{Definición:} verificación dinámica de la adecuación del sistema a los requerimientos (de distinto tipo). Es el proceso de ejecutar un producto para verificar que satisface los requerimientos e identificar diferencias entre el comportamiento real y el comportamiento esperado. 
+
+\textbf{No prueba la correctitud del software!!!} 
+
+\begin{quote}
+El testing puede demostrar la presencia de errores, nunca su ausencia (Dijkstra)
+\end{quote}
+
+El objetivo del proceso de Testing es encontrar fallas importantes del sistema
+
+Se realiza ejecutando el programa y comparando resultados contra un oráculo (el mismo tester) \footnote{Se asume que se puede ejecutar el programa, que se conoce el resultado esperado y que el resultado esperado puede compararse con el resultado obtenido.}.
+
+\subsection{Proceso de testing}
+El testing debe ser un proceso paralelo al desarrollo, no una actividad al final.
+
+\subsubsection{Niveles de test}
+
+\begin{description}
+	%\item Aceptación: último test que se hace junto con el cliente
+	\item [Test de Sistema:] testea la funcionalidad del sistema completo con respecto a lo requerido por el cliente. Si el cliente participa se lo denomina \textbf{Test de aceptación}.
+	\item [Test de Integración:] test orientado a verificar que las partes de un sistema, que funcionan bien aisladamente, también lo hacen en conjunto
+	\item [Test de Unidad:] test realizado sobre una unidad de código pequeña y claramente definida (método, procedimiento, etc). Comúnmente es realizado por los desarrolladores.
+\end{description}
+
+\includegraphics[width = 0.9\textwidth]{Graficos/procesoTesting.png}
+
+El \textbf{el test funcional o de sistema} se prepara inicialmente en función de los requerimientos. Luego este test dará lugar al \textbf{test aceptación}.
+
+Sobre la base anterior se realiza un diseño preliminar que incluye al \textbf{test de integración}, y el diseño detallado el \textbf{test de unidades}. Una vez todo listo se comienza con la programación.
+
+Asociado a la implementación de los tests, está la creación del ambiente, la ejecución de los casos, la documentación, el seguimiento, etc.
+
+\subsubsection{Actividades del proceso de Testing}
+ Asociadas a arquitectura y diseño detallado
+
+\begin{itemize}
+	\item Planificación de test de integración y unidad
+	\item Generación de casos de test funcionales
+\end{itemize}
+
+ Asociadas a la implementación 
+\begin{itemize}
+	\item creación de ambiente de ejecución de tests
+	\item generación de casos de test estructurales
+	\item ejecución de test de unidad
+	\item ejecución de test de integración
+	\item documentación de resultados
+	\item seguimiento de errores
+	\item test de regresión
+\end{itemize}
+
+\subsection{Terminología}
+\begin{description}
+	\item[Requerimientos de Test:] qué quiero testear.
+	\item[Especificaciones de Test:] supuestos y definiciones que sirven para generar los casos de test para el requerimiento de test.
+	\item[Casos de Test:] descripciones de condiciones o situaciones a testear.
+	\item[Dato de Test:] asignación de valores concretos de parámetros para ejecutar un caso de test.
+	\item[Test Suite:] conjuntos de datos de test con los que se testea el programa.
+\end{description}
+
+Un test suite $T$ es \emph{exitoso} para un programa $P$ si $P$ es correcto para todo elemento de $T$.
+
+\subsection{Criterios de Selección de Casos de Test}
+
+Una de las mayores dificultades es encontrar un conjunto de tests adecuado:
+\begin{itemize}
+	\item suficientemente grande para abarcar el dominio y maximizar la probabilidad de encontrar errores
+	\item suficientemente pequeño para poder ejecutar el proceso de testing con cada elemento del conjunto y minimizar el costo del testing
+\end{itemize}
+
+La intuición nos dice que posiblemente haya inputs ``parecidos'', tal que testear el programa para uno de ellos equivaldría a testearlo para todos. Esto no es verdad pero sirve y es la base de la mayoría de las técnicas de test.
+
+Un \emph{criterio} es un subconjunto de conjuntos finitos del dominio de inputs del programa $P$ (expresado con predicados)
+
+Un conjunto de datos $T$ satisface un criterio $C \Leftrightarrow  T \in C $
+
+Un criterio $C$ es \emph{Consistente} para $P$ sii para todo par $T_1$ y $T_2$ de test sets que satisfacen $C$, $T_1$ es exitoso para $P$ $\Leftrightarrow $ $T_2$ lo es. Es decir, para los conjuntos de datos que considero equivalente, el programa devuelve el mismo resultado esperado.
+
+Un criterio $C$ es \emph{Completo} para $P$ sii si $P$ es incorrecto entonces hay un test set $T$ que satisface $C$, tal que $T$ no es exitoso para $P$ (i.e. si $P$ tiene un bug, entonces algún caso de $C$ lo encuentra).
+
+Sin embargo estas nociones no son efectivas, es decir, no hay manera de evaluar si un determinado criterio es completo y/o consistente (mucho menos generar uno).
+
+Como es imposible encontrar un criterio Completo y/o Consistente para un programa arbitrario(probaría corrección) se utilizan heurísticas para generarlos.
+
+Los criterios pueden ser
+\begin{description}
+	\item[Criterios de Caja Negra:] se desentienden de la estructura interna del programa pero no de su especificación.
+	\item[Criterios de Caja Blanca:] los casos de test se definen a partir de la estructura interna del programa.
+\end{description}
+
+Es importante que los casos de test generados se testeen tanto condiciones válidas y esperadas, así como condiciones inválidas e inesperadas.
+
+\section{Testing Funcional}
+El testing funcional debe testear que un programa $p$ implementa una funcionalidad $f$ correctamente, es decir, que para todo elemento del dominio el resultado de $p$ coincide con el de $f$. 
+
+Además debe avisar que la entrada no pertenece al dominio, y en caso de errores no destruir el sistema (o colgarse) sino simplemente notificar del error. 
+
+Se busca testear que el programa haga lo que debe y no haga lo que no debe.
+
+\subsection{Criterios de Testing Funcional}
+Con estas técnicas se busca encontrar encontrar casos que tengan una alta probabilidad de encontrar errores a un bajo costo. La idea es buscar casos generales, sistematizables y semi-automatizables.
+
+\subsubsection{Category Partition}
+\paragraph{Método:}
+\begin{enumerate}
+	\item Elegir una funcionalidad que pueda testearse en forma independiente.
+	\item Determinar sus parámetros u otros objetos del ambiente(\emph{contexto}) que puedan afectar sus funcionamiento(\emph{factores}).
+	\item Determinar las características relevantes de cada factor y de las relaciones entre factores(\emph{categorías}).
+	\item Determinar las posibles elecciones (\emph{choices}) para cada categoría.
+	\item Restringir casos con clasificaciones: \emph{errores}, \emph{únicos}, \emph{restricciones} y \emph{properties} (\texttt{if}).
+	\item Armar casos de test.
+\end{enumerate}
+
+\paragraph{Conclusiones}
+\begin{itemize}
+	\item El método se puede aplicar a cualquier descripción de funcionalidad (formal, semiformal o informal).
+	\item Es necesario usar los requerimientos para planificar el testing. Esto genera preguntas de incompletitud, ambigüedad, inconsistencia e incorrección en un momento en que es ``fácil'' corregir requerimientos.
+	\item No hay una única solución: dependiendo como se realice el proceso se obtendrá un conjunto particular de casos de test.
+	\item Los casos de test pueden conocerse incluso antes de la implementación 
+\end{itemize}
+
+
+\subsubsection{Notación Arbórea}
+Es un método similar a \emph{category-partition} donde la combinación de factores se realiza mediante un árbol. Es útil cuando hay un orden de ingreso apara los parámetros.
+
+\paragraph{Método}
+\begin{itemize}
+	\item Se arma un árbol donde cada nodo indica una categoría sobre un parámetro combinación entre un parámetro y otro anteriormente descripto en el árbol.
+	\item Los ejes que salen son los choices compatibles con las condiciones acumuladas desde la raíz.
+	\item Los casos de test especificados y ejecutados son los caminos del árbol.
+\end{itemize}
+
+\subsubsection{Grafo Causa-Efecto}
+Permite definir combinaciones relevantes de categorías binarias sobre inputs para definir casos (diferencia con category-partition).
+
+Se utiliza cuando hay mucha dependencia entre inputs y outputs. Ayuda a detectar ambigüedades e incompletitud en la especificación.
+
+\subsubsection*{Método}
+
+Se busca generar todos los outputs admisibles con la siguiente heurística:
+\begin{itemize}
+	\item Si hay un ``or'' entonces todas las opciones con sólo una señal en True.
+	\item Si hay un ``and'' entonces todas las opciones con sólo una señal en False.
+\end{itemize}
+
+Esto reduce la cantidad de combinaciones de $O(2^n)$ a $O(n*k*o)$ donde:
+\begin{itemize}
+	\item $n \rightarrow$ cantidad de categorías binarias sobre el input.
+	\item $k \rightarrow$ profundidad del diagrama.
+	\item $o \rightarrow$ cantidad de combinaciones de outputs válidas.
+\end{itemize}
+
+\subsubsection{Arreglos ortogonales(OATS, Orthogonal Array Testing Strategy)}
+Se basa en \emph{2-wise testing}, que sostiene que la mayoría de los errores se dan por combinaciones de uno o dos parámetros (errores simples o dobles). Se busca poder realizar tests más económicos sin caer en la explosión combinatoria de partición de dominios, testeando la interacción entre pares de factores.
+
+Para esto se generan arreglos ortogonales de los factores tomados de a dos: se generan todas las posibles combinaciones de todos los pares de factores. En las tablas, se toman las filas como los casos de test y las columnas como los factores. Luego se unen todas las combinaciones obtenidas en una tabla de casos de test.
+
+Se define $level$ como la cantidad de valores (choices) posibles para un determinado factor. Los tests se tabulan como $L_{runs}$($Levels^{Factors}$); por ejemplo, $L_{18}(3^6 6^1)$ implica que se usaron 18 corridas para testear 7 factores: uno de seis niveles y seis de tres niveles. Se define $strength$ como la cantidad de columnas tales que las $Levels^{Strength}$ posibilidades aparecen la misma cantidad de veces.
+
+\subsubsection{Conclusiones}
+\begin{itemize}
+	\item Ninguna técnica es completa (cada una ataca diferentes problemas).
+	\item Lo mejor es combinar varias de estas técnicas para complementar las ventajas de cada una.
+	\item Depende del programa a testear.
+	\item Sin especificación de requerimientos todo es más difícil.
+	\item Hay que ser sistemático y documentar las suposiciones sobre el comportamiento o el modelo de fallas.
+\end{itemize}
+
+\section{Testing Estructural de Unidades}
+Se representa el flujo de control de un programa con un grafo de flujo (\emph{flowgraph}). Los flowgraph pueden representar programas secuenciales con un único punto de ingreso y un único punto de terminación.
+
+Un camino en un flowgraph desde el nodo asociado al inicio del programa hasta el nodo final se llama \emph{camino completo}. Una ejecución del programa que termina satisfactoriamente está asociada a un camino completo.
+
+Un camino en un flowgraph para el cual no existe input del programa que fuerce su ejecución se dice \emph{camino no factible}.
+
+Cada camino factible puede tener muchos inputs que lo fuercen.
+
+\subsection{Criterios de Testing Estructural}
+Un criterio de testing estructural permite identificar entidades que deben cubrirse con los datos de test para satisfacer el criterio.
+
+\subsection*{Basados en Flujo de Control}
+
+\subsubsection{Cubrimiento de Sentencias o Instrucciones}
+\label{cubrimientoSentencias}
+\textbf{Criterio:} todas las sentencias del programa deben testearse (equivale a cubrir todos los nodos del flowgraph)
+
+\paragraph{Método:}
+\begin{enumerate}
+	\item Con el código como base dibujamos el grafo de flujo de control.
+	\item Determinamos un conjunto de caminos que cumple el criterio.
+	\item Preparamos los datos de test que forzarán la ejecución de cada camino.
+	\item Evaluamos si satisfacemos el criterio.
+	\item Eventualmente iteramos.
+\end{enumerate}
+
+\subsubsection{Cubrimiento de decisiones Branch}
+\label{cubrimientoBranch}
+	El problema en \ref{cubrimientoSentencias} es que algunas decisiones se testean solo por True o por False.
+	
+	\textbf{Criterio:} todas las decisiones en el control del programa deben ejercitarse al menos una vez por True y otra vez por False. Esto equivale a cubrir todos los arcos del flowgraph.
+	$Branch \implies Sentencias$ (cubrir ejes de un árbol implica cubrir nodos)
+	
+\subsubsection{Cubrimiento de Condiciones}
+El problema en \ref{cubrimientoBranch} es que una decisión puede estar compuesta por varias condiciones (and, or) y no se cubren todas.
+
+\textbf{Criterio:} todas las condiciones en el control del programa deben testearse al menos una vez por True y al menos una vez por False.
+
+Branch no implica Condiciones y Condiciones no implica Branch (idem Sentencias)
+
+\subsubsection{Cubrimiento de Caminos}
+Todo camino del flujo de control del programa debe ejercitarse al menos una vez (equivale a cubrir todos los caminos del flowgraph).
+
+Es poco factible ya que podrían ser muchos casos.
+	
+\subsection*{Basados en Flujo de Datos (Data-Flow Testing)}
+\subsubsection{Def-Use flowgraph}
+\textbf{Definiciones}
+Una sentencia que guarda un valor en la posición de memoria de una variable, crea una \emph{definición}.
+Una sentencia que trae el valor de la posición de memoria de una variable es un \emph{uso} de la definición activa de esa variable.
+\begin{itemize}
+	\item Un uso de $x$ es un $uso predicado$ o $p-uso$ si aparece en el predicado de una sentencia que representa una bifurcación de control
+	\item En otro caso, se llama $uso computacional$ o $c-uso$ (aparece del lado derecho de una asignación)
+\end{itemize}
+
+El \emph{def-use flowgraph} de un programa $P$ y una variable $X$ es un flowgraph de $P$ donde cada definición o c-uso de $X$ se asocia a un nodo, y cada p-uso de $X$ a un arco.
+
+Una \emph{DUA (definition-use association)} es una terna $[d, u, x]$ tal que
+
+\begin{itemize}
+	\item la variable $x$ está definida en el nodo $d$
+	\item la variable $x$ se usa en el nodo $u$ o en el arco $u$
+	\item hay al menos un camino desde $d$ hasta $u$ que no contiene otra definición de $x$ además de la de $d$ (libre de definiciones para $x$)
+\end{itemize}
+
+Es decir, es una terna que vincula una definición de $x$ con su uso inmediato.
+
+A partir de estos conceptos se generan distintos criterios:
+
+\begin{itemize}
+	\item all defs
+	\item all c-use
+	\item all p-use
+	\item all uses
+	\item all c-use some p-uses
+	\item all p-uses some c-uses
+	\item all du-paths
+\end{itemize}
+
+\textbf{Cubrimiento All-uses:} para cada variable en el programa, deben ejercitarse toda las asociaciones entre cada definición y toda uso de la misma (tal que esa definición esté activa), equivale a cubrir todas las DUAS del programa.	
+
+\subsection{Subsumption de criterios Estructurales}
+
+Un criterio $A$ subsume a otro criterio $B$ si un conjunto de datos de test $T$ satisface un criterio $A$, entonces $T$ satisface $B$. Por ejemplo, instrucciones subsume a branches, que subsume a caminos.
+
+\includegraphics[width = 0.9\textwidth]{Graficos/subsumption.png}
+
+Los de más arriba tienen más posibilidades de encontrar fallas.
+
+\section{Test de requerimientos no funcionales}
+\begin{itemize}
+\item Test de seguridad: validando disponibilidad, integridad y confidencialidad de datos y servicios
+\item Test de performance: validando los tiempos de acceso y respuesta del sistema
+\item Test de stress: validando el uso del sistema en sus límites de capacidad y verificando sus reacciones más allá de los mismos
+\item Test de Usabilidad
+\end{itemize}
+
+\section{Ejecución del testing}
+\renewcommand{\labelenumi}{\textbf{\alph{enumi}.}}
+\begin{enumerate}
+	\item \textbf{Selección de datos}
+	
+Se seleccionan y generan los datos que cumplen con los casos de tests diseñados para ejecutarlos.
+
+	\item \textbf{Ambiente de test}
+
+El test de unidades se realiza por los programadores en el ambiente de desarrollo, mientras que los tests de aceptación, integración y sistema se realizan en un ambiente de testing separado del de desarrollo. Una vez aceptados, pueden pasar a producción, donde son reabsorbidos por desarollo.
+
+	\item \textbf{Terminación del testing}
+
+\begin{itemize}
+	\item Se terminó el tiempo o recursos
+	\item Se corrieron todos los tests derivados sin detectarse ningún error
+	\item Porcentaje de cubrimiento de ciertas técnicas elegidas
+	\item Fault-rate más bajo que un cierto valor especificado (\# de errores por unidad de tiempo de testing)
+	\item Se encontró un número predeterminado de errores (\% del número total de errores estimado)
+\end{itemize}
+
+	\item \textbf{Documentación}
+
+Se deben documentar los casos de test, los criterios utilizados, los datos de prueba y criterios de terminación; también es necesario un reporte de ejecución luego de haberlos ejecutado que informe del ambiente y los resultados obtenidos.
+
+	\item \textbf{Seguimiento}
+
+Debe realizarse un seguimiento de los errores desde que son detectados hasta que son finalmente aceptados, previo haber pasado por desarrollo para su corrección mediante debugging.
+
+	\item \textbf{Test de Regresión}
+
+	El test de regresión consiste en retestear un sistema luego de haber sido modificado para corregir un determinado elemento, adaptarse a un nuevo ambiente, mejorar prestaciones, etc. Los casos de regresión pueden ser:
+
+	\begin{itemize}
+		\item Reusables: testeando aspectos no modificados
+		\item Restesteables: testeando aspectos de igual especificación pero distinta implementación
+		\item Obsoletos: testeando una funcionalidad cuyo requerimiento fue modificado
+	\end{itemize}
+\end{enumerate}
+

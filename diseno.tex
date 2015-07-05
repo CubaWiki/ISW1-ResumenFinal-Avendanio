@@ -1,0 +1,252 @@
+%Sección Diseño
+
+\chapter{Diseño}
+\section{Definición}
+
+\noindent Diseñar involucra estructurar la solución utilizando abstracciones y relaciones entre las abstracciones para:
+\begin{itemize}
+	\item Documentar y comprender la propuesta de solución
+	\item Razonar sobre su grado de adecuación a los requerimientos
+	\item Comunicarla e implementarla
+	\item Verificar/Validar el producto final
+	\item Modificar/Adaptar la solución cuando cambien los requerimientos
+\end{itemize}
+
+\noindent A diferencia de requerimientos, en diseño:
+\begin{itemize}
+	\item Se denotan conceptos del mundo de la solución y no del problema, pero incluye fenómenos de la interfaz mundo-máquina.
+	\item Se describe propiedades localizadas (unidad, componente, módulo) y son de naturaleza operacional.
+\end{itemize}
+
+\subsubsection*{Objetivos de la etapa de diseño}
+\begin{itemize}
+	\item Descomponer el sistema en entidades de diseño ``más chicas''
+	\item Determinar la relación entre entidades
+	\item Fijar mecanismos de interacción
+	\item Especificar interfaces y funcionalidades de entidades
+	\item Identificar oportunidades para el reuso
+	\item Documentar lo anterior y los fundamentos de las elecciones
+\end{itemize}
+
+El diseño es un proceso iterativo, enfocado al \emph{``que y cómo''} ( en contraposición al \emph{``que y porque''} de la etapa de relevamiento de Requerimientos).
+
+\section{Vistas}
+La descripción de un sistema complejo no es unidimensional. Es clave saber cuáles son las vistas relevantes y vinculadas. 
+
+Las vistas enfatizan aspectos e ignoran otros para que el problema sea abordable. Cada vista enfoca en una problemática en particular, permite responder cierta clase de preguntas y admite varios niveles de abstracción y técnicas de modelado.
+
+Los diferentes tipos de vistas pueden clasificarse en
+\subsection{Vista Estática o Modular} 
+
+Relacionada con el agrupamiento de código
+	
+	\textbf{Módulo:} unidad de código que implementa un conjunto de responsabilidades (una clase, una colección de clases o cualquier descomposición de código). Es una unidad \emph{design-time}.
+	
+	\subparagraph{Entidades:} métodos, procedimientos, clases, librerías, DLLS, APIs, paquetes. módulos.
+	\subparagraph{Relaciones:} es-parte-de, depende-de, es-un.
+	\subparagraph{Ejemplos:} diagrama de clases, diagrama de paquetes.
+
+La manera de modularizar suele determinar características como: modificabilidad, portabilidad y reuso.
+
+\noindent Análisis que permite realizar:
+\begin{itemize}
+	\item Trazabilidad de requerimientos
+	\item Análisis de impacto
+	\item Comunicación a otras personas
+	\item Nivel de granularidad
+\end{itemize}
+
+\noindent No sirve para:
+\begin{itemize}
+	\item realizar inferencias sobre comportamiento del sistema en su ejecución
+	\item realizar análisis de performance.
+\end{itemize}
+
+
+\subsection{Vista Dinámica o de Componentes y Conectores}
+
+Relacionada con las entidades \emph{run-time}.
+
+\textbf{Entidades:} procesos, threads, objetos, protocolos.
+
+Las entidades \emph{run-time} son instancias de tipos de conector o componente. Son entidades que consumen recursos y contribuyen al comportamiento en ejecución del sistema.
+
+\textbf{Relaciones:} se-comunica-con, bloquea, contiene, crea, destruye.
+
+\textbf{Ejemplos:} máquinas de estado, diagrama de secuencias y colaboración, diagrama de objetos, diagrama de componentes.
+
+\noindent Análisis que permite realizar:
+\begin{itemize}
+	\item Confiabilidad
+	\item Performance: tiempo de respuesta, tiempo de latencia y volumen de procesamiento
+	\item Recursos requeridos: almacenamiento y procesamiento
+	\item Funcionalidad
+	\item Protocolos
+	\item Seguridad
+\end{itemize}
+
+\subsection{Vista de Despliegue (Deployment)}
+
+\textbf{Entidades:} recursos y repositorios
+
+\textbf{Relaciones:} procesos ejecuta sobre server, código de módulos almacenado en directorios, equipo de trabajo desarrolla paquete.
+
+\textbf{Ejemplos:} Diagrama de Despliegue
+
+\section{Principios de Diseño}
+
+\subsection{Descomposición}
+
+\emph{Divide and conquer:} se parte cada parte del problema en subproblemas o componentes más pequeños siguiendo una estrategia adecuada (como ser pasos de ejecución, datos, tiempos, funcionalidades, etc), determinar las relaciones entre dichos componentes e iterar. 
+
+Es importante tener una estrategia de composición, no sólo de división (Divide to Conquer and reunite to rule)
+
+\subsection{Abstracción}
+Se basa en suprimir detalles de la implementación y posponer decisiones de diseño que ocurren a distintos niveles del análisis. El objetivo es simplificar el análisis, comprensión y justificación de decisiones.
+
+La abstracción puede ser procedural (funciones, métodos, etc), de datos (TADs) o de control (loops, iteradores, multitasking).
+
+\subsection{Encapsulamiento}
+	Se basa en mantener una clara separación entre interface e implementación. Con esto se logra no conocer ni usar más de lo que la interfaz promete.
+	
+	\subparagraph{Control Inversion Principle:} Uso de frameworks, implementaciones parciales que el usuario debe rellenar para lograr la funcionalidad deseada; la diferencia principal con las librerías es que es el framework el que invoca el código del usuario y no al revés.
+
+\subsection{Information Hiding}
+
+Relacionado estrechamente con encapsulamiento.
+
+Se base en esconder decisiones de diseño que pueden llegar  a cambiar. Con esto se busca minimizar el impacto de cambios futuros. Para esto se programa orientado a interfaces.
+
+\subparagraph{Dependency Inversion Principle:} Las dependencias se hacen hacia interfaces o clases abstractas, no hacia las implementaciones concretas.
+
+
+\subsection{Modularidad}
+Un módulo es una entidad estática que agrupa ciertas funcionalidades (superior a una clase). Tiene una interfaz bien separada de su implementación, garantiza alta cohesión y bajo acoplamiento.
+
+Indicios de una buena modularización es tener una jerarquía de módulos lo suficientemente independientes, con responsabilidades claras y delimitadas, donde un cambio en uno impacta lo menos posible en el resto del sistema.
+
+\paragraph{Cohesión:}
+
+Es el grado de unión (cuán bien trabajan juntos) que tienen los distintos elementos de un módulo. Alta cohesión provee: robustez, confiabilidad, reusabilidad, comprensibilidad, testeabilidad y mantenibilidad.
+
+Pueden definirse distintos tipos de cohesión, de peor a mejor, considerándose aceptables sólo los tres últimos:
+\begin{itemize}
+	\item \textbf{Coincidental:} Ej. mis funciones de uso frequente, utils.lib
+	\item \textbf{Lógico:} existe una categoría lógica que agrupa elementos aunque hagan cosas muy distintas (ej. todas las rutinas de I/O)
+	\item \textbf{Temporal:} agrupadas por el momento en que se ejecutaran (ej. funciones que atajan un error de output, crean un error en un log y notifican al usuario)
+	\item \textbf{Procedural:} agrupadas por pertenecer a una misma secuencia de ejecución o política (ej. funciones que chequean permisos y abren archivos)
+	\item \textbf{Comunicacional:} agrupadas por operar sobre los mismo datos (ej. objetos, operaciones sobre clientes)
+	\item \textbf{Secuencial:} agrupadas porque el output de uno es el input de otro
+	\item \textbf{Funcional:} agrupadas porque contribuyen a una tarea bien definida del módulo
+\end{itemize}
+
+\subparagraph{Single Responsibility Principle:} A class should have only one reason to change; busca obtener un alto grado de cohesión, una clase debe tener una y solo una responsabilidad.
+
+\paragraph{Acoplamiento:}
+
+Grado de dependencia del módulo sobre otros módulos y en particular las decisiones de diseño que estos hacen. Generalmente proporcional al grado de cohesión. 
+
+Un alto acoplamiento conlleva una alta propagación de cambios y necesidades de testing, dificulta la comprensión de los módulos de forma aislada y trae problemas al reuso y retesteo.
+
+Los tipos de acoplamiento son, de mayor a menor:
+
+\begin{itemize}
+	\item \textbf{Contenido:} Cuando un módulo modifica o confía en el lo interno de otro
+	\item \textbf{Común:} Cuando comparten datos comunes 
+	\item \textbf{Externo: }Cuando comparten aspectos impuestos externamente al diseño (ej. formato de datos, protocolo de comunicación, interfaz de dispositivo)
+	\item \textbf{Control:} Cuando un módulo controla la lógica del otro 
+	\item \textbf{Estampillado(Stamp):} Cuando comparten una estructura de datos pero cada uno usa sólo una porción 
+	\item \textbf{Datos:} Módulos se comunican a través de datos en parámetros 
+	\item \textbf{Mensajes: }Módulos se comunican a través de mensajes, posiblemente no se conocen explícitamente
+\end{itemize}
+
+\subparagraph{Interface Seggregation Principle:} muchas interfaces para los diferentes clientes son mejores que una única interface de propósito general. Busca separar interfaces para minimizar dependencias y reducir el fanning.
+
+\subsection{Extensibilidad}
+
+El diseño debe ser capaz de acomodarse a los cambios de requerimientos sin sufrir modificaciones, siendo extendido con facilidad.
+
+\subparagraph{Open/closed Principle:} la entidades de software deben ser abiertas para la extensión  pero cerradas para la modificación be open. Suele implementarse mediante polimorfismo e interfaces.
+
+\subparagraph{Liskov Substitution Principle:} las subclases deben ser sustituibles por sus clases bases.
+
+\subparagraph{Ley de Demeter:} No hablar con extraños, se basa en que un método de un objeto sólo puede llamar métodos del propio objeto, sus parámetros o aquellos objetos que constituyen el objeto de manera directa o fueron creados por él. Se evita llamar métodos de objetos remotos retornados por otros métodos. 
+
+Facilita la mantenibilidad y adaptabilidad pero tiende a generar wrappers molestos y poco cohesivos.
+
+\section{Programación Orientada a Objetos(POO)}
+\subsection{Definiciones}
+
+\textbf{Objeto:} entidad \emph{run-time} que actúa como una unidad de encapsulamiento. Encapsula estado (vía variables internas) y comportamiento (vía métodos internos).
+
+Los objetos encapsulan atributos/campos permitiendo acceso a ellos únicamente a través de los métodos.
+
+\textbf{Clase} entidad \emph{design-time}\footnote{No es estrictamente verdad, depende del leguaje (Ej: en Smaltalk las clases son objetos)}. Representa una clasificaciçon de objetos. Define el comportamiento y atributos de un grupo de objetos con estructura y comportamiento similar (un objeto es una instancia de una clase).
+
+La \emph{instanciación} es el proceso de creación de un objeto a partir de la definición de una clase. Se realiza mediante el llamado a un constructor.
+
+\subsection{Relaciones entre clases}
+\begin{itemize}
+	\item \textbf{Dependencia:} define una relación \emph{``usa''} o \emph{``conoce a''}. Indica que el cambio de una clase puede afectar a la otra. Es la relación más débil.
+	\item \textbf{Agregación:} indica una relación \emph{``parte de''} o \emph{``tiene un''}. Es un tipo especial de dependencia.
+	\item \textbf{Composición:} es un tipo especial de agregación donde:
+		\begin{itemize}
+			\item las partes no se comparten
+			\item la existencia de las partes depende de la existencia del contenedor.
+		\end{itemize}
+	\item {Generalización/Especialización (Herencia):} denota la relación \emph{``es un''}		
+		\begin{itemize}
+			\item Permite reuso y factorización de código
+			\item Permite polimorfismo por medio de subtipado
+			\item Es el mecanismo de extensión sugerido por medio de subtipado
+		\end{itemize}
+\end{itemize}
+
+\subsection{Polimorfismo}
+Se refiere a tratar de manera uniforme estructuras que pueden tener más de un forma.
+
+\paragraph{Conceptos relacionados:}
+\begin{itemize}
+	\item \emph{Herencia:} es el proceso de derivar una clase especializada de una clase ya existente.
+	\item \emph{tipo real(actual):} es el tipo que tiene un objeto en run-time (\texttt{new relojDigital})
+	\item \emph{tipo aparente:} es el tipo que deriva estáticamente del compilador (\texttt{Reloj r})		
+		\begin{itemize}
+			\item \emph{Regla: el tipo aparente debe ser supertipo del tipo real.}
+		\end{itemize}
+	\item \emph{Binding:} resolución del método invocado (si es Late-Binding se hace en tiempo de ejecución)
+	\item \emph{Upcasting} y \emph{Downcasting}
+\end{itemize}
+
+\subsection{Clase vs. Tipo}
+
+Un \textbf{tipo} $T$ denota un conjunto de objetos que satisface un predicado asociado al tipo $T$.
+
+Un \textbf{subtipo} $S$ de $T$ denota un subconjunto de elementos de $T$ que satisfacen un predicado más restrictivo que asociado al tipo $T$.
+
+\paragraph{Principio de Sustitución de Liskov/Wing}
+\emph{Cualquier propiedad que podamos probar sobre objetos del tipo/clase $T$, también debe poder probarse para objetos del subtipo $S$.}
+
+Es una manera razonable de lograr subtipado sano en jerarquías de clases OO (algunos programadores lo encuentran muy restrictivo)
+
+Significa que las subclases preservan el comportamiento de las superclases.
+
+El requerimiento se cumple si pedimos \textbf{contravarianza} en los argumentos y \textbf{covarianza} en los resultados.
+
+\comentario{Poner grafico de Liskov}
+
+\subsection{Clases Abstractas e Interfaces}
+
+Una \textbf{Clase Abstracta} es una clase que no puede ser instanciada. Agrupa una implementación común a un conjunto de clases. No dan una implementación concreta (métodos abstractos).
+
+Una \textbf{interface}(Java) es un conjunto de métodos y constantes identificadas con un nombre. Los métodos de una interface no son implementados por ella. Las clases (abstractas o no) derivadas de una interface, deben implementar todos los métodos de la interface.
+
+Las interfaces son utilizadas para separar (desacoplar) la especificación disponible al usuario de las implementaciones. Además se puede ``simular'' herencia múltiple haciendo que una clase implemente dos interfaces.
+
+\section{Patrones de Diseño}
+\comentario{completar}
+
+
+
+
+
+

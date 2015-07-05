@@ -1,0 +1,89 @@
+%%	SECCION documentclass																									 %%	
+%%---------------------------------------------------------------------------%%
+\documentclass[a4paper]{report}
+%%---------------------------------------------------------------------------%%
+%%	SECCION usepackage																											 %%	
+%%---------------------------------------------------------------------------%%
+\usepackage{amsmath, amsthm}
+\usepackage{amsfonts}%
+\usepackage{amssymb}%
+\usepackage[spanish,activeacute]{babel}
+\usepackage{caratula}
+\usepackage{hyperref} %para que haya hipervínculos
+\usepackage{graphicx} % Para el logo magico!
+\usepackage[latin1]{inputenc}
+\usepackage{color}
+\usepackage{ingsoft1}
+\usepackage{slashbox} %Para agregar divisione en diagonal en las tablas
+\usepackage{alltt} % que es este paquete???
+ \usepackage{pdflscape}%Para poner paginas apaisadas
+
+
+\newcommand{\rojo}[1]{\textcolor{red}{#1}}
+\newcommand{\azul}[1]{\textcolor{blue}{#1}}
+\newcommand{\verde}[1]{\textcolor{green}{#1}}
+\newcommand{\descripcion}[1]{\rojo{#1}}
+\newcommand{\ejemplo}[1]{\azul{\begin{quote} #1 \end{quote}}}
+\newcommand{\comentario}[1]{\rojo{\emph{#1}}}
+%\newcommand{\definicion}[1]{\textbf{#1}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definicion}[theorem]{Definición}
+
+%%---------------------------------------------------------------------------%%
+%%	SECCION opciones																												 %%	
+%%---------------------------------------------------------------------------%%
+
+\oddsidemargin 0cm
+\headsep -1.4cm
+\textwidth=16.5cm
+\textheight=23cm
+\makeindex
+
+%%---------------------------------------------------------------------------%%
+%%	SECCION document	                                                       %%	
+%%---------------------------------------------------------------------------%%
+\begin{document}
+	\setcounter{page}{0} %para que numere a la caratula como página 0 y a las demas a partir de 1
+
+%%---- Caratula -------------------------------------------------------------%%
+\title{Resumen Final}
+\author{Santiago Avendaño\thanks{This is for making an acknowledgement.}
+\\Universidad de Buenos Aires, Argentina}
+\date{10 Febrero, 2009}
+
+\materia{Resumen Final}
+\titulo{Ingenier'ia de Software I}
+%\subtitulo{}
+
+\integrante{Avenda\~no, Santiago}{113/06}{santiavenda2@hotmail.com}
+\grupo{Grupo n'umero}
+%\resumen{}
+\maketitle
+
+\tableofcontents
+
+\newpage
+\input{Infopdf}
+\clearpage
+
+\newpage
+\input{IntroduccionIS}
+\clearpage
+
+\newpage
+\input{ingenieriaRequerimientos}
+\clearpage
+
+
+\newpage
+\input{diseno}
+\clearpage
+
+\newpage
+\input{testing}
+\clearpage
+
+
+
+\end{document}
